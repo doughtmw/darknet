@@ -273,11 +273,29 @@ https://groups.google.com/d/msg/darknet/NbJqonJBTSY/Te5PfIpuCAAJ
 
 7. Download pre-trained weights for the convolutional layers (76 MB): http://pjreddie.com/media/files/darknet19_448.conv.23 and put to the directory `build\darknet\x64`
 
-8. Start training by using the command line: `darknet.exe detector train data/obj.data yolo-obj.cfg darknet19_448.conv.23`
+8. Start training by using the command line: 
 
-    (file `yolo-obj_xxx.weights` will be saved to the `build\darknet\x64\backup\` for each 100 iterations)
-    (To disable Loss-Window use `darknet.exe detector train data/obj.data yolo-obj.cfg darknet19_448.conv.23 -dont_show`, if you train on computer without monitor like a cloud Amazaon EC2)
+  Adjust the `max_batches` parameter in cfg file to scale with number of classes and prevent overfitting of data.
+  - https://github.com/AlexeyAB/darknet#how-to-improve-object-detection
 
+  #### Train:
+  ```
+  ./darknet.exe detector train data_custom/simulated_data.data yolo.2.0-simulated_data.cfg darknet19_448.conv.23
+  ```
+
+  #### Resume training by selecting the most recent weights file:
+  ```
+  ./darknet.exe detector train data_custom/simulated_data.data yolo.2.0-simulated_data.cfg backup/yolo_1200.weights
+  ```
+
+  (file `yolo-obj_xxx.weights` will be saved to the `build\darknet\x64\backup\` for each 100 iterations)
+  (To disable Loss-Window use `darknet.exe detector train data/obj.data yolo-obj.cfg darknet19_448.conv.23 -dont_show`, if you train on computer without monitor like a cloud Amazaon EC2)
+  
+  #### Detect custom objects in test images
+  Enter the location of image data after following command.
+  ```
+  ./darknet.exe detector test data_custom/simulated_data.data yolo.2.0-simulated_data.cfg backup/yolo_final.weights
+  ```
 9. After training is complete - get result `yolo-obj_final.weights` from path `build\darknet\x64\backup\`
 
  * After each 1000 iterations you can stop and later start training from this point. For example, after 2000 iterations you can stop training, and later just copy `yolo-obj_2000.weights` from `build\darknet\x64\backup\` to `build\darknet\x64\` and start training using: `darknet.exe detector train data/obj.data yolo-obj.cfg yolo-obj_2000.weights`
