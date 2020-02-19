@@ -285,7 +285,12 @@ https://groups.google.com/d/msg/darknet/NbJqonJBTSY/Te5PfIpuCAAJ
 
   #### Resume training by selecting the most recent weights file:
   ```
+  # Simulated data
   ./darknet.exe detector train data_custom/simulated_data.data yolo.2.0-simulated_data.cfg backup/yolo_1200.weights
+
+  # Atlas dione data
+  ./darknet.exe detector train data_atlas_dione/atlas_dione.data yolo.2.0-atlas_dione.cfg darknet19_448.conv.23
+
   ```
 
   (file `yolo-obj_xxx.weights` will be saved to the `build\darknet\x64\backup\` for each 100 iterations)
@@ -295,6 +300,10 @@ https://groups.google.com/d/msg/darknet/NbJqonJBTSY/Te5PfIpuCAAJ
   Enter the location of image data after following command.
   ```
   ./darknet.exe detector test data_custom/simulated_data.data yolo.2.0-simulated_data.cfg backup/yolo_final.weights
+  ```
+  #### Detect custom objects in test video data
+  ```
+./darknet.exe detector demo data_atlas_dione/atlas_dione.data yolo.2.0-atlas_dione.cfg backup_atlas_dione/yolo_4000.weights data_atlas_dione/test_jigsaws.avi -i 0 -out_filename data_atlas_dione/test_detections.mp4 -thresh 0.6 -iou_thresh 0.5
   ```
 9. After training is complete - get result `yolo-obj_final.weights` from path `build\darknet\x64\backup\`
 
