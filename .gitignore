@@ -19,7 +19,11 @@ convnet/
 decaf/
 submission/
 cfg/
-build/darknet/*
+build/darknet/x64/Release/
+build/darknet/x64/backup/
+build/darknet/x64/data/egohands/
+build/darknet/x64/results/
+build/darknet/x64/Release/
 build_*/
 !build/darknet/YoloWrapper.cs
 .fuse*

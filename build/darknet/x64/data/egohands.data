@@ -1,0 +1,7 @@
+classes = 2
+train  = data/egohands/train.txt
+valid  = data/egohands/test.txt
+names = data/egohands.names
+backup = backup/
+eval=coco
+
